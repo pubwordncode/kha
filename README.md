@@ -1,9 +1,12 @@
 # kha
 === CSS 구조 ===
+
 1. base.css
 
 Reset + 공통 스타일 + 폰트, 기본 색상 등
 CSS 변수나 기본 타이포그래피도 포함
+
+
 
 2. layout.css
 
