@@ -1,0 +1,316 @@
+@charset "UTF-8";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 62.5%;
+    letter-spacing: -0.025em;
+	font-family: Pretendard, "맑은고딕", Arial, sans-serif;
+	font-style: normal;
+    vertical-align: baseline;
+    -webkit-text-size-adjust : none;  /* 크롬, 사파리, 오페라 신버전 */
+    -ms-text-size-adjust : none;  /* IE */
+    -moz-text-size-adjust : none;  /* 파이어폭스 */
+    -o-text-size-adjust : none;  /* 오페라 구버전 */
+    -webkit-appearance: none;   
+    -webkit-overflow-scrolling:auto;
+    box-sizing: border-box;
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+button, html [type="button"] {
+    -webkit-appearance: none;   
+  }
+select{-webkit-appearance: none;appearance: none;-moz-appearance: none;background: url('../images/common/search_select_arrow.png') no-repeat right 18px center;color: #888888;}
+select::-ms-expand {display:none}
+input, select{padding: 0;margin: 0;border: 1px solid #ebebeb;box-sizing: border-box;color: #000;font-size: 1.6rem;vertical-align: middle; -webkit-appearance: none;-webkit-border-radius: 0;}
+legend{font-size: 0;text-indent: -100000px;left: -10000px;top: auto;height: 0;overflow: hidden;}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    -ms-overflow-style: none;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    padding:0;
+    border:0;
+    border-spacing:0px;
+    border-collapse:collapse;
+    width:100%;
+    
+}
+th,td{
+    padding:0;
+}
+table caption{position:absolute;top:-9999px;left:-9999px;}
+
+a{text-decoration:none; color: #000;cursor:pointer;} 
+
+button, input[type="submit"], select{cursor:pointer}
+button{border:none;padding:0;margin:0;background:none;}
+a.button {cursor: pointer;vertical-align: middle;}
+b{font-size: inherit; font-weight: 600;}
+// iOS / 모바일 터치시 기본 배경 제거 //
+a, button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+  }
+  
+
+/* color */
+
+// 디자인컴포넌트에 있는 이름으로 변수명 
+
+// primary
+$primary900 : #420D0E;
+$primary800 : #581213;
+$primary700 : #841A1C;
+$primary600 : #B12326;
+$primary500 : #DD2C2F;
+$primary400 : #E45659;
+$primary300 : #EB8082;
+$primary200 : #F1ABAC;
+$primary100 : #F8D5D5;
+$primary50: #FFEBED;
+$primary0: #FFF5F6;
+
+
+// secondary
+
+$secondary900 :#3F1F08;
+$secondary800 :#64320D;
+$secondary700 :#964A14;
+$secondary600 :#C8631A;
+$secondary500 :#FA7C21;
+$secondary400 :#FB964D;
+$secondary300 :#FCB07A;
+$secondary200 :#FDCBA6;
+$secondary100 :#FEE5D3;
+$secondary50 :#FFF2E9;
+$secondary0 :#FFF9F4;
+
+// Neutral
+
+$black : #000;
+$Neutral500:#333;
+$Neutral400:#575757;
+$Neutral300:#888;
+$Neutral200:#CACACA;
+$Neutral150:#E8E8E8;
+$Neutral100:#EEE;
+$Neutral50:#F5F5F5;
+$Neutral0:#FAFAFA;
+$white : #fff;
+
+// System
+
+$danger : #DD2C2F;
+$warning : #F6CA2D;
+$success : #33BC51;
+$info : #4263EB;
+
+/* //color */
+
+
+/* mixins */
+
+//font-face 설정
+@mixin fontFace($font-family, $font-weight, $font-style, $font-name) {
+    @font-face {
+      font-family: #{$font-family};
+      font-weight: #{$font-weight};
+      font-style: #{$font-style};
+  
+      src: url("/assets/font/#{$font-name}.woff") format("woff"),
+        url("/assets/font/#{$font-name}.ttf") format("truetype");
+    }
+  }
+  
+  //공통 폰트 스타일을 설정하는 대신 아래의 믹스인으로 폰트스타일을 작성한다
+  //@include fontStyle(폰트사이즈, lineheight 값, font-weight 값) { 스타일 정의 };
+  @mixin fontStyle($size, $lineheight, $weight) {
+    font-size: $size;
+    line-height: $lineheight;
+    letter-spacing: $size * -0.02;
+    font-weight: $weight;
+  }
+  
+  //letter-spacing
+  @mixin letterSpacing($fontSize) {
+    letter-spacing: calc($fontSize * -0.02);
+  }
+  
+  // 배경이미지
+  //@include backgroundImage(넓이, 높이, image폴더 이후에 파일 경로 ,배경이미지사이즈-기본 cover)  { 스타일 정의 };
+  @mixin backgroundImage($width, $height, $file, $bgsize: cover) {
+    width: $width;
+    height: $height;
+    background-image: url("/assets/image/#{$file}");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: $bgsize;
+  }
+
+  // 말줄임
+  @mixin ellipsis($lines: 1) {
+    @if ($lines==1) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    } @else {
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: $lines;
+      -webkit-box-orient: vertical;
+    }
+ }
+
+
+/* //mixins */
+
+
+
+/* typography */
+
+//weight700 : bold
+
+.bold-48{
+    @include fontStyle(48px, 67.2px, 700);
+    color:$black;
+}
+
+.bold-40{
+    @include fontStyle(40px, 56px, 700);
+    color:$black;
+}
+
+.bold-32{
+    @include fontStyle(32px, 44.8px, 700);
+    color:$black;
+}
+
+.bold-24{
+    @include fontStyle(24px, 33.6px, 700);
+    color:$black;
+}
+
+.bold-20{
+    @include fontStyle(20px, 28px, 700);
+    color:$black;
+}
+
+.bold-18{
+    @include fontStyle(18px, 25.2px, 700);
+    color:$black;
+}
+
+.bold-16{
+    @include fontStyle(16px, 22.4px, 700);
+    color:$black;
+}
+
+.bold-14{
+    @include fontStyle(14px, 19.6px, 700);
+    color:$black;
+}
+
+.bold-13{
+    @include fontStyle(13px, 18.2px, 700);
+    color:$black;
+}
+
+
+//weight500 : medium
+
+.medium-18{
+    @include fontStyle(18px, 25.2px, 500);
+    color:$black;
+}
+
+.medium-16{
+    @include fontStyle(16px, 22.4px, 500);
+    color:$black;
+}
+
+.medium-14{
+    @include fontStyle(14px, 19.6px, 500);
+    color:$black;
+}
+
+.medium-13{
+    @include fontStyle(13px, 18.2px, 500);
+    color:$black;
+}
+
+
+
+//weight400 : regular
+
+.regular-18{
+    @include fontStyle(18px, 25.2px, 400);
+    color:$black;
+}
+
+.regular-16{
+    @include fontStyle(16px, 22.4px, 400);
+    color:$black;
+}
+
+.regular-14{
+    @include fontStyle(14px, 19.6px, 400);
+    color:$black;
+}
+
+.regular-13{
+    @include fontStyle(13px, 18.2px, 400);
+    color:$black;
+}
+
+.title {
+    line-height: 25.2px;
+    color: #575757;
+}
+
+.title strong {
+    color: #420D0E;
+}
+
+
+/* //typography */
